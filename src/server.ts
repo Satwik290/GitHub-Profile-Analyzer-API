@@ -8,12 +8,29 @@ async function bootstrap(): Promise<void> {
   await assertDatabaseConnection();
 
   const app = createApp();
-  app.listen(env.PORT, () => {
+  const server = app.listen(env.PORT, () => {
     logger.info("GitHub Profile Analyzer API started", {
       port: env.PORT,
       apiPrefix: env.API_PREFIX,
       environment: env.NODE_ENV
     });
+  });
+
+  server.on("error", (error: NodeJS.ErrnoException) => {
+    if (error.code === "EADDRINUSE") {
+      logger.error("Failed to start API: port is already in use", {
+        port: env.PORT,
+        hint: `Another process is already listening on port ${env.PORT}. Stop that process or set PORT to another value in .env, for example PORT=3001.`
+      });
+      process.exit(1);
+    }
+
+    logger.error("Failed to start API listener", {
+      message: error.message,
+      code: error.code,
+      stack: error.stack
+    });
+    process.exit(1);
   });
 }
 
