@@ -1,0 +1,60 @@
+{
+  "info": {
+    "name": "GitHub Profile Analyzer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "username",
+      "value": "octocat"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Analyze Profile",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/v1/profiles/{{username}}/analyze?forceRefresh=true&maxRepositories=100"
+      }
+    },
+    {
+      "name": "List Stored Profiles",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/profiles?page=1&limit=20"
+      }
+    },
+    {
+      "name": "Get Stored Profile",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/profiles/{{username}}"
+      }
+    },
+    {
+      "name": "Get Profile Repositories",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/profiles/{{username}}/repositories"
+      }
+    },
+    {
+      "name": "Get Profile Insights",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/profiles/{{username}}/insights"
+      }
+    }
+  ]
+}

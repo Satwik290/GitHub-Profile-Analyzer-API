@@ -1,0 +1,24 @@
+node_modules
+dist
+.env
+.env.*
+!*.example
+*.log
+coverage
+# Ignore docs output (if generated)
+docs/
+# Ignore database config examples (except .example)
+.env.tidb
+.env.tidb.*
+!.env.tidb.example
+# Ignore OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+# Ignore test and coverage outputs
+coverage/
+nyc_output/
+# Ignore build outputs
+build/
+tmp/
+temp/
